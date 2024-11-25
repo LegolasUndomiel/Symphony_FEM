@@ -1,0 +1,43 @@
+\documentclass[lang=cn,newtx,10pt,scheme=chinese]{elegantbook}
+
+\usepackage{amsmath}
+\usepackage{physics}
+
+\title{Symphony of Finite Element Methods}
+% \subtitle{学习笔记}
+
+\author{王松}
+% \institute{Elegant\LaTeX{} Program}
+\date{\today}
+\version{0.1}
+% \bioinfo{自定义}{信息}
+
+\setcounter{tocdepth}{3}
+
+% \logo{logo-blue.png}
+\cover{cover.pdf}
+
+% 本文档命令
+\usepackage{array}
+\newcommand{\ccr}[1]{\makecell{{\color{#1}\rule{1cm}{1cm}}}}
+
+% 修改标题页的橙色带
+\definecolor{customcolor}{RGB}{32,178,170}
+\colorlet{coverlinecolor}{customcolor}
+\usepackage{cprotect}
+
+\begin{document}
+
+\maketitle
+\frontmatter
+
+\tableofcontents
+
+\mainmatter
+
+\part{数学基础}
+\input{Part_Math/Tensor/Derivative.tex} % 张量导数
+
+\part{连续介质力学}
+
+\end{document}
