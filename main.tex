@@ -1,7 +1,25 @@
 \documentclass[lang=cn,newtx,10pt,scheme=chinese]{elegantbook}
 
 \usepackage{amsmath}
+\usepackage{arydshln}
 \usepackage{physics}
+\usepackage{tikz}
+
+\newcommand{\MyTikzmark}[2]{%
+     \tikz[overlay,remember picture,baseline] \node [anchor=base] (#1) {$#2$};%
+}
+
+\newcommand{\DrawVLine}[3][]{%
+  \begin{tikzpicture}[overlay,remember picture]
+    \draw[shorten <=0.3ex, #1] (#2.north) -- (#3.south);
+  \end{tikzpicture}
+}
+
+\newcommand{\DrawHLine}[3][]{%
+  \begin{tikzpicture}[overlay,remember picture]
+    \draw[shorten <=0.2em, #1] (#2.west) -- (#3.east);
+  \end{tikzpicture}
+}
 
 \title{Symphony of Finite Element Methods}
 % \subtitle{学习笔记}
@@ -39,5 +57,8 @@
 \input{Part_Math/Tensor/Derivative.tex} % 张量导数
 
 \part{连续介质力学}
+
+\part{刚体力学}
+\input{Part_Rigid/Rigid.tex}
 
 \end{document}

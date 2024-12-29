@@ -1,0 +1,190 @@
+\chapter{刚体力学}
+
+\begin{equation}
+    \vec{H}^A=\vec{r}^G\times m\vec{V}^G+\vec{H}^G
+\end{equation}
+
+刚体的运动方程为：
+\begin{equation}
+\begin{bmatrix}
+    \begin{array}{ccc:ccc}
+    I^G_{xx} & 0 & 0 & 0 & -mr^G_z & mr^G_y \\
+    0 & I^G_{yy} & 0 & mr^G_z & 0 & - mr^G_x \\
+    0 & 0 & I^G_{zz} & -mr^G_y & mr^G_x & 0 \\
+    \hdashline
+    0 & r^G_z & -r^G_y & -1 & 0 & 0 \\
+    -r^G_z & 0 & r^G_x & 0 & -1 & 0 \\
+    r^G_y & -r^G_x & 0 & 0 & 0 & -1
+    \end{array}
+\end{bmatrix}
+\begin{bmatrix}
+    \begin{array}{c}
+    \alpha_x \\
+    \alpha_y \\
+    \alpha_z \\
+    \hdashline
+    a^G_x \\
+    a^G_y \\
+    a^G_z
+    \end{array}
+\end{bmatrix} =
+\begin{bmatrix}
+    \begin{array}{c}
+    M^A_x-\qty(\omega_y H^A_z-\omega_z H^A_y) \\
+    M^A_y-\qty(\omega_z H^A_x-\omega_x H^A_z) \\
+    M^A_z-\qty(\omega_x H^A_y-\omega_y H^A_x) \\
+    \hdashline
+    -a^A_x - \qty(\omega_y(\omega_x r^G_y - \omega_y r^G_x) - \omega_z(\omega_z r^G_x - \omega_x r^G_z))\\
+    -a^A_y - \qty(\omega_z(\omega_y r^G_z - \omega_z r^G_y) - \omega_x(\omega_x r^G_y - \omega_y r^G_x))\\
+    -a^A_z - \qty(\omega_x(\omega_z r^G_x - \omega_x r^G_z) - \omega_y(\omega_y r^G_z - \omega_z r^G_y))
+    \end{array}
+\end{bmatrix}
+\end{equation}
+
+\begin{align*}
+    A &=
+    \begin{bmatrix}
+    I^G_{xx} & 0 & 0 \\
+    0 & I^G_{yy} & 0 \\
+    0 & 0 & I^G_{zz} \\
+    \end{bmatrix}&
+    &B = m
+    \begin{bmatrix}
+    0 & -r^G_z & r^G_y \\
+    r^G_z & 0 & - r^G_x \\
+    -r^G_y & r^G_x & 0
+    \end{bmatrix}\\
+    C &=
+    \begin{bmatrix}
+    0 & r^G_z & -r^G_y \\
+    -r^G_z & 0 & r^G_x \\
+    r^G_y & -r^G_x & 0
+    \end{bmatrix}&
+    &D = -
+    \begin{bmatrix}
+    1 & 0 & 0 \\
+    0 & 1 & 0 \\
+    0 & 0 & 1
+    \end{bmatrix}\\
+    \alpha &=
+\begin{bmatrix}
+    \alpha_x \\
+    \alpha_y \\
+    \alpha_z \\
+\end{bmatrix}&
+    &a^G =
+    \begin{bmatrix}
+    a^G_x \\
+    a^G_y \\
+    a^G_z
+    \end{bmatrix}\\
+    b &=
+\begin{bmatrix}
+    M^A_x-\qty(\omega_y H^A_z-\omega_z H^A_y) \\
+    M^A_y-\qty(\omega_z H^A_x-\omega_x H^A_z) \\
+    M^A_z-\qty(\omega_x H^A_y-\omega_y H^A_x) \\
+\end{bmatrix}&
+    &E =
+    \begin{bmatrix}
+    -a^A_x - \qty(\omega_y(\omega_x r^G_y - \omega_y r^G_x) - \omega_z(\omega_z r^G_x - \omega_x r^G_z))\\
+    -a^A_y - \qty(\omega_z(\omega_y r^G_z - \omega_z r^G_y) - \omega_x(\omega_x r^G_y - \omega_y r^G_x))\\
+    -a^A_z - \qty(\omega_x(\omega_z r^G_x - \omega_x r^G_z) - \omega_y(\omega_y r^G_z - \omega_z r^G_y))
+    \end{bmatrix}
+\end{align*}
+
+自由刚体的运动方程为：
+
+\begin{equation}
+\begin{bmatrix}
+    I^G_{xx} & 0 & 0 & \MyTikzmark{colAt}{0} & \MyTikzmark{colBt}{-mr^G_z} & \MyTikzmark{colCt}{mr^G_y} \\
+    0 & I^G_{yy} & 0 & mr^G_z & 0 & - mr^G_x \\
+    0 & 0 & I^G_{zz} & -mr^G_y & mr^G_x & 0 \\
+    \MyTikzmark{rowAl}{0} & r^G_z & -r^G_y & -1 & 0 & 0 \\
+    \MyTikzmark{rowBl}{-r^G_z} & 0 & r^G_x & 0 & -1 & 0 \\
+    \MyTikzmark{rowCl}{r^G_y} & -r^G_x & 0 & \MyTikzmark{colAb}{0} & \MyTikzmark{colBb}{0} & \MyTikzmark{colCb}{-1}
+\end{bmatrix}
+\begin{bmatrix}
+    \alpha_x \\
+    \alpha_y \\
+    \alpha_z \\
+    a^G_x \\
+    a^G_y \\
+    a^G_z
+\end{bmatrix} =
+\begin{bmatrix}
+    b_x \\
+    b_y \\
+    b_z \\
+    \MyTikzmark{rowAr}{E_x} \\
+    \MyTikzmark{rowBr}{E_y} \\
+    \MyTikzmark{rowCr}{E_z}
+\end{bmatrix}
+\DrawHLine[blue, thick, opacity=0.5]{rowAl}{rowAr}
+\DrawHLine[blue, thick, opacity=0.5]{rowBl}{rowBr}
+\DrawHLine[blue, thick, opacity=0.5]{rowCl}{rowCr}
+\DrawVLine[blue, thick, opacity=0.5]{colAt}{colAb}
+\DrawVLine[blue, thick, opacity=0.5]{colBt}{colBb}
+\DrawVLine[blue, thick, opacity=0.5]{colCt}{colCb}
+\end{equation}
+
+约束一个方向自由度，不妨设为$x$方向，则方程为：
+\begin{equation}
+\begin{bmatrix}
+    I^G_{xx} & 0 & 0 & \MyTikzmark{colAt}{0} & \MyTikzmark{colBt}{-mr^G_z} & \MyTikzmark{colCt}{mr^G_y} \\
+    0 & I^G_{yy} & 0 & mr^G_z & 0 & - mr^G_x \\
+    0 & 0 & I^G_{zz} & -mr^G_y & mr^G_x & 0 \\
+    \MyTikzmark{rowAl}{0} & r^G_z & -r^G_y & -1 & 0 & 0 \\
+    \MyTikzmark{rowBl}{-r^G_z} & 0 & r^G_x & 0 & -1 & 0 \\
+    \MyTikzmark{rowCl}{r^G_y} & -r^G_x & 0 & \MyTikzmark{colAb}{0} & \MyTikzmark{colBb}{0} & \MyTikzmark{colCb}{-1}
+\end{bmatrix}
+\begin{bmatrix}
+    \alpha_x \\
+    \alpha_y \\
+    \alpha_z \\
+    a^G_x \\
+    a^G_y \\
+    a^G_z
+\end{bmatrix} =
+\begin{bmatrix}
+    b_x \\
+    b_y \\
+    b_z \\
+    \MyTikzmark{rowAr}{E_x} \\
+    \MyTikzmark{rowBr}{E_y} \\
+    \MyTikzmark{rowCr}{E_z}
+\end{bmatrix}
+\DrawHLine[blue, thick, opacity=0.5]{rowBl}{rowBr}
+\DrawHLine[blue, thick, opacity=0.5]{rowCl}{rowCr}
+\DrawVLine[blue, thick, opacity=0.5]{colBt}{colBb}
+\DrawVLine[blue, thick, opacity=0.5]{colCt}{colCb}
+\end{equation}
+
+约束两个方向自由度，不妨设为$x$和$y$方向，则方程为：
+\begin{equation}
+\begin{bmatrix}
+    I^G_{xx} & 0 & 0 & \MyTikzmark{colAt}{0} & \MyTikzmark{colBt}{-mr^G_z} & \MyTikzmark{colCt}{mr^G_y} \\
+    0 & I^G_{yy} & 0 & mr^G_z & 0 & - mr^G_x \\
+    0 & 0 & I^G_{zz} & -mr^G_y & mr^G_x & 0 \\
+    \MyTikzmark{rowAl}{0} & r^G_z & -r^G_y & -1 & 0 & 0 \\
+    \MyTikzmark{rowBl}{-r^G_z} & 0 & r^G_x & 0 & -1 & 0 \\
+    \MyTikzmark{rowCl}{r^G_y} & -r^G_x & 0 & \MyTikzmark{colAb}{0} & \MyTikzmark{colBb}{0} & \MyTikzmark{colCb}{-1}
+\end{bmatrix}
+\begin{bmatrix}
+    \alpha_x \\
+    \alpha_y \\
+    \alpha_z \\
+    a^G_x \\
+    a^G_y \\
+    a^G_z
+\end{bmatrix} =
+\begin{bmatrix}
+    b_x \\
+    b_y \\
+    b_z \\
+    \MyTikzmark{rowAr}{E_x} \\
+    \MyTikzmark{rowBr}{E_y} \\
+    \MyTikzmark{rowCr}{E_z}
+\end{bmatrix}
+\DrawHLine[blue, thick, opacity=0.5]{rowCl}{rowCr}
+\DrawVLine[blue, thick, opacity=0.5]{colCt}{colCb}
+\end{equation}
