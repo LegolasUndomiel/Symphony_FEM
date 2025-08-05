@@ -1,12 +1,178 @@
 \chapter{刚体运动学}
 \section{数学基础}
 \subsection{随体坐标系基矢量求导}
+\begin{equation}
+  \frac{\mathrm{d}\vec{e}_i}{\mathrm{d}t}=\epsilon_{ijk}\vec{e}_j\omega_k
+\end{equation}
 \subsection{随体坐标系矢量求导}
+\begin{equation}
+  \begin{split}
+    \frac{\mathrm{d}\vec{v}}{\mathrm{d}t}&=\frac{\mathrm{d}}{\mathrm{d}t}(v_i\vec{e}_i)=\frac{\mathrm{d}v_i}{\mathrm{d}t}\vec{e}_i+v_i\frac{\mathrm{d}\vec{e}_i}{\mathrm{d}t}\\
+    &=\frac{\mathrm{d}v_i}{\mathrm{d}t}\vec{e}_i+v_i(\epsilon_{ijk}\vec{e}_j\omega_k)\\
+    &=\frac{\mathrm{d}v_i}{\mathrm{d}t}\vec{e}_i+\epsilon_{ijk}v_k\vec{e}_i\omega_j\\
+    &=\qty(\frac{\mathrm{d}v_i}{\mathrm{d}t}+\epsilon_{ijk}\omega_jv_k)\vec{e}_i
+  \end{split}
+\end{equation}
+
+\begin{equation}
+  \frac{\mathrm{d}\vec{v}}{\mathrm{d}t}=\frac{\mathrm{d}v_i}{\mathrm{d}t}\vec{e}_i+\vec{\omega}\times\vec{v}
+\end{equation}
+
 \section{速度分解}
+\begin{equation}
+  \vec{r}^B=\vec{r}^A+\vec{r}^{B/A}
+\end{equation}
+
+\begin{equation}
+  \begin{split}
+    \vec{v}^B&=\frac{\mathrm{d}\vec{r}^B}{\mathrm{d}t}=\frac{\mathrm{d}}{\mathrm{d}t}\qty(\vec{r}^A+\vec{r}^{B/A})\\
+    &=\frac{\mathrm{d}\vec{r}^A}{\mathrm{d}t}+\frac{\mathrm{d}\vec{r}^{B/A}}{\mathrm{d}t}\\
+    &=\vec{v}^A+\bcancel{\frac{\mathrm{d}r^{B/A}_i}{\mathrm{d}t}\vec{e}_i}+\vec{\omega}\times\vec{r}^{B/A}\\
+    &=\vec{v}^A+\vec{\omega}\times\vec{r}^{B/A}
+  \end{split}
+\end{equation}
 \section{加速度分解}
+\begin{equation}
+  \begin{split}
+    \vec{a}^B&=\frac{\mathrm{d}\vec{v}^B}{\mathrm{d}t}=\frac{\mathrm{d}}{\mathrm{d}t}\qty(\vec{v}^A+\vec{\omega}\times\vec{r}^{B/A})\\
+    &=\frac{\mathrm{d}\vec{v}^A}{\mathrm{d}t}+\frac{\mathrm{d}}{\mathrm{d}t}\qty(\vec{\omega}\times\vec{r}^{B/A})\\
+    &=\vec{a}^A+\frac{\mathrm{d}\vec{\omega}}{\mathrm{d}t}\times\vec{r}^{B/A}+\vec{\omega}\times\frac{\mathrm{d}\vec{r}^{B/A}}{\mathrm{d}t}\\
+    &=\vec{a}^A+\vec{\alpha}\times\vec{r}^{B/A}+\vec{\omega}\times(\vec{\omega}\times\vec{r}^{B/A})
+  \end{split}
+\end{equation}
+
+\begin{equation}
+  \begin{split}
+    \vec{a}^B&=\frac{\mathrm{d}\vec{v}^B}{\mathrm{d}t}=\frac{\mathrm{d}}{\mathrm{d}t}\qty(\vec{v}^A+\vec{\omega}\times\vec{r}^{B/A})\\
+    &=\frac{\mathrm{d}\vec{v}^A}{\mathrm{d}t}+\frac{\mathrm{d}}{\mathrm{d}t}\qty(\vec{\omega}\times\vec{r}^{B/A})\\
+    &=\vec{a}^A+\qty(\frac{\mathrm{d}}{\mathrm{d}t}(\epsilon_{ijk}\omega_jr^{B/A}_k)\vec{e}_i+\vec{\omega}\times\qty(\vec{\omega}\times\vec{r}^{B/A}))\\
+    &=\vec{a}^A+\qty(\epsilon_{ijk}\alpha_jr^{B/A}_k+\bcancel{\epsilon_{ijk}\omega_j\frac{\mathrm{d}\vec{r}^{B/A}_k}{\mathrm{d}t}})\vec{e}_i+\vec{\omega}\times(\vec{\omega}\times\vec{r}^{B/A})\\
+    &=\vec{a}^A+\vec{\alpha}\times\vec{r}^{B/A}+\vec{\omega}\times(\vec{\omega}\times\vec{r}^{B/A})
+  \end{split}
+\end{equation}
+
+\begin{equation}
+  \vec{v}^B=v^B_i\vec{e}_i=\qty(v^A_i+\epsilon_{ijk}\omega_jr^{B/A}_k)\vec{e}_i
+\end{equation}
+
+\begin{equation}
+  \begin{split}
+    \vec{a}^B&=\frac{\mathrm{d}\vec{v}^B}{\mathrm{d}t}=\frac{\mathrm{d}}{\mathrm{d}t}\qty(v^B_i\vec{e}_i)\\
+    &=\frac{\mathrm{d}v^B_i}{\mathrm{d}t}\vec{e}_i+\vec{\omega}\times\vec{v}^B\\
+    &=\qty(\frac{\mathrm{d}}{\mathrm{d}t}\qty(v^A_i+\epsilon_{ijk}\omega_jr^{B/A}_k))\vec{e}_i+\vec{\omega}\times\qty(\vec{v}^A+\vec{\omega}\times\vec{r}^{B/A})\\
+    &=\qty(\frac{\mathrm{d}v^A_i}{\mathrm{d}t}\vec{e}_i+\vec{\omega}\times\vec{v}^A)+\epsilon_{ijk}\alpha_jr^{B/A}_k\vec{e}_i+\bcancel{\epsilon_{ijk}\omega_j\frac{\mathrm{d}r^{B/A}_k}{\mathrm{d}t}\vec{e}_i}+\vec{\omega}\times(\vec{\omega}\times\vec{r}^{B/A})\\
+    &=\vec{a}^A+\vec{\alpha}\times\vec{r}^{B/A}+\vec{\omega}\times(\vec{\omega}\times\vec{r}^{B/A})
+  \end{split}
+\end{equation}
 \section{角动量}
 \subsection{任意点的角动量}
+\begin{equation}
+  \vec{H}^A_i=\vec{r}^{i/A}\times m_i\vec{v}^i
+\end{equation}
+
+\begin{equation}
+  \begin{split}
+    \vec{H}^A&=\int_m\vec{r}''\times\vec{v}\mathrm{d}m\\
+    &=\int_m\vec{r}''\times\qty(\vec{v}^A+\vec{\omega}\times\vec{r}'')\mathrm{d}m\\
+    &=\qty(\int_m\vec{r}''\mathrm{d}m)\times\vec{v}^A+\int_m\vec{r}''\times(\vec{\omega}\times\vec{r}'')\mathrm{d}m\\
+    &=\vec{r}^{G/A}\times m\vec{v}^A+\int_m\vec{r}''\times(\vec{\omega}\times\vec{r}'')\mathrm{d}m
+  \end{split}
+\end{equation}
+
 \subsection{固定点的角动量}
+\begin{equation}
+  \begin{split}
+    \vec{H}^O&=\bcancel{\vec{r}^{G}\times m\vec{v}^O}+\int_m\vec{r}\times(\vec{\omega}\times\vec{r})\mathrm{d}m\\
+    &=\int_m\vec{r}\times(\vec{\omega}\times\vec{r})\mathrm{d}m
+  \end{split}
+\end{equation}
 \subsection{质心的角动量}
+\begin{equation}
+  \begin{split}
+    \vec{H}^G&=\bcancel{\vec{r}^{G/G}\times m\vec{v}^G}+\int_m\vec{r}'\times(\vec{\omega}\times\vec{r}')\mathrm{d}m\\
+    &=\int_m\vec{r}'\times(\vec{\omega}\times\vec{r}')\mathrm{d}m
+  \end{split}
+\end{equation}
 \subsection{相互关系}
+\begin{equation}
+  \begin{split}
+    \vec{H}^A&=\vec{r}^{G/A}\times m\vec{v}^A+\int_m\vec{r}''\times(\vec{\omega}\times\vec{r}'')\mathrm{d}m\\
+    &=\vec{r}^{G/A}\times m\qty(\vec{v}^G+\vec{\omega}\times\vec{r}^{A/G})+\int_m\vec{r}''\times(\vec{\omega}\times\vec{r}'')\mathrm{d}m\\
+    &=\vec{r}^{G/A}\times m\vec{v}^G+\vec{r}^{G/A}\times m(\vec{\omega}\times\vec{r}^{A/G})+\int_m(\vec{r}'+\vec{r}^{A/G})\times\qty(\vec{\omega}\times(\vec{r}'+\vec{r}^{A/G}))\mathrm{d}m\\
+    &=\vec{r}^{G/A}\times m\vec{v}^G+\vec{r}^{G/A}\times m(\vec{\omega}\times\vec{r}^{A/G})+\int_m\vec{r}'\times(\vec{\omega}\times\vec{r}')\mathrm{d}m+\int_m\vec{r}'\times(\vec{\omega}\times\vec{r}^{A/G})\mathrm{d}m\\
+    &+\int_m\vec{r}^{A/G}\times(\vec{\omega}\times\vec{r}')\mathrm{d}m+\int_m\vec{r}^{A/G}\times(\vec{\omega}\times\vec{r}^{A/G})\mathrm{d}m\\
+    &=\vec{r}^{G/A}\times m\vec{v}^G+\vec{r}^{G/A}\times m(\vec{\omega}\times\vec{r}^{A/G})+\int_m\vec{r}'\times(\vec{\omega}\times\vec{r}')\mathrm{d}m+\bcancel{\qty(\int_m\vec{r}'\mathrm{d}m)\times(\vec{\omega}\times\vec{r}^{A/G})}\\
+    &+\bcancel{\vec{r}^{A/G}\times\qty(\vec{\omega}\times\qty(\int_m\vec{r}'\mathrm{d}m))}+\vec{r}^{A/G}\times m(\vec{\omega}\times\vec{r}^{A/G})\\
+    &=\vec{r}^{G/A}\times m\vec{v}^G+\int_m\vec{r}'\times(\vec{\omega}\times\vec{r}')\mathrm{d}m\\
+    &=\vec{r}^{G/A}\times m\vec{v}^G+\vec{H}^G
+  \end{split}
+\end{equation}
+
 \section{Inertia Tensor}
+\subsection{惯性张量定义}
+\begin{equation}
+  \begin{split}
+    \vec{H}&=\int_m\vec{r}\times(\vec{\omega}\times\vec{r})\mathrm{d}m\\
+    &=\int_m((\vec{r}\cdot\vec{r})\vec{\omega}-(\vec{r}\cdot\vec{\omega})\vec{r})\mathrm{d}m\\
+    &=\qty(\omega_x\int_m(x^2+y^2+z^2)\mathrm{d}m-\int_m\qty(\omega_xx+\omega_yy+\omega_zz)x\mathrm{d}m)\vec{e}_i\\
+    &+\qty(\omega_y\int_m(x^2+y^2+z^2)\mathrm{d}m-\int_m\qty(\omega_xx+\omega_yy+\omega_zz)y\mathrm{d}m)\vec{e}_j\\
+    &+\qty(\omega_z\int_m(x^2+y^2+z^2)\mathrm{d}m-\int_m\qty(\omega_xx+\omega_yy+\omega_zz)z\mathrm{d}m)\vec{e}_k\\
+    &=\qty(\qty(\int_m(y^2+z^2)\mathrm{d}m)\omega_x-\qty(\int_mxy\mathrm{d}m)\omega_y-\qty(\int_mxz\mathrm{d}m)\omega_z)\vec{e}_i\\
+    &+\qty(\qty(\int_m(z^2+x^2)\mathrm{d}m)\omega_y-\qty(\int_myz\mathrm{d}m)\omega_z-\qty(\int_myx\mathrm{d}m)\omega_x)\vec{e}_j\\
+    &+\qty(\qty(\int_m(x^2+y^2)\mathrm{d}m)\omega_z-\qty(\int_mzx\mathrm{d}m)\omega_x-\qty(\int_mzy\mathrm{d}m)\omega_y)\vec{e}_k
+  \end{split}
+\end{equation}
+\subsection{惯性张量的性质}
+\begin{equation}
+  \begin{split}
+    \vec{H}=&
+    \begin{bmatrix}
+      I_{xx} & -I_{xy} & -I_{xz} \\
+      -I_{yx} & I_{yy} & -I_{yz} \\
+      -I_{zx} & -I_{zy} & I_{zz}
+    \end{bmatrix}
+    \begin{bmatrix}
+      \omega_x \\
+      \omega_y \\
+      \omega_z
+    \end{bmatrix}\\
+    &=
+    \begin{bmatrix}
+      I_1 & 0 & 0 \\
+      0 & I_2 & 0 \\
+      0 & 0 & I_3
+    \end{bmatrix}
+    \begin{bmatrix}
+      \hat{\omega}_x \\
+      \hat{\omega}_y \\
+      \hat{\omega}_z
+    \end{bmatrix}
+  \end{split}
+\end{equation}
+\subsection{平移轴定理}
+\begin{equation}
+  \begin{split}
+    I^O_{xx}&=I^G_{x'x'}+m(y^2_G+z^2_G)\\
+    I^O_{yy}&=I^G_{y'y'}+m(z^2_G+x^2_G)\\
+    I^O_{zz}&=I^G_{z'z'}+m(x^2_G+y^2_G)\\
+    I^O_{xy}&=I^G_{x'y'}+mx_Gy_G\\
+    I^O_{xz}&=I^G_{x'z'}+mx_Gz_G\\
+    I^O_{yz}&=I^G_{y'z'}+my_Gz_G
+  \end{split}
+\end{equation}
+
+\begin{equation}
+  \begin{split}
+    I^O_{xx}&=\int_m(y^2+z^2)\mathrm{d}m=\int_m\qty((y'+y_G)^2+(z'+z_G)^2)\mathrm{d}m\\
+    &=\int_m\qty(y'^2+z'^2)\mathrm{d}m+\int_m\qty(y_G^2+z_G^2)\mathrm{d}m+\bcancel{2y_G\int_my'\mathrm{d}m}+\bcancel{2z_G\int_mz'\mathrm{d}m}\\
+    &=I^G_{x'x'}+m(y_G^2+z_G^2)
+  \end{split}
+\end{equation}
+
+\begin{equation}
+  \begin{split}
+    I^O_{xy}&=\int_mxy\mathrm{d}m=\int_m((x'+x_G)(y'+y_G))\mathrm{d}m\\
+    &=\int_mx'y'\mathrm{d}m+\int_mx_Gy_G\mathrm{d}m+\bcancel{x_G\int_my'\mathrm{d}m}+\bcancel{y_G\int_mx'\mathrm{d}m}\\
+    &=I^G_{x'y'}+mx_Gy_G
+  \end{split}
+\end{equation}

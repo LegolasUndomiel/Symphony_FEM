@@ -1,32 +1,6 @@
 \chapter{张量导数}
 
 \section{随体坐标系}
-\subsection{基矢量求导}
-\begin{equation}
-    \frac{\mathrm{d} \vec{e}_i}{\mathrm{d}t}=\epsilon_{ijk}\Omega_k\vec{e}_j
-\end{equation}
-\subsection{矢量求导}
-\begin{equation}
-    \begin{split}
-        \frac{\mathrm{d} \vec{v}}{\mathrm{d}t}&=\frac{\mathrm{d}}{\mathrm{d}t}(v_i\vec{e}_i)\\
-        &=\frac{\mathrm{d}v_i}{\mathrm{d}t}\vec{e}_i+v_i\frac{\mathrm{d}\vec{e}_i}{\mathrm{d}t}\\
-        &=\frac{\mathrm{d}v_i}{\mathrm{d}t}\vec{e}_i+v_i(\epsilon_{ijk}\Omega_k\vec{e}_j)\\
-        &=\qty(\frac{\mathrm{d}v_i}{\mathrm{d}t}+\epsilon_{ijk}\Omega_jv_k)\vec{e}_i
-    \end{split}
-\end{equation}
-
-\begin{equation}
-    \epsilon_{ijk}\Omega_jv_k=(\vec{\Omega}\times\vec{v})_{i}
-\end{equation}
-
-\begin{equation}
-    \dot{\vec{v}}=(\dot{\vec{v}})_{xyz}+\vec{\Omega}\times\vec{v}
-\end{equation}
-
-\begin{equation}
-    (\dot{\vec{v}})_{xyz}=\dot{v}_x\vec{i}+\dot{v}_y\vec{j}+\dot{v}_z\vec{k}
-\end{equation}
-
 \subsection{张量求导}
 \begin{equation}
     \begin{split}
