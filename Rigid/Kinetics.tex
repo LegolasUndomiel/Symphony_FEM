@@ -1,26 +1,216 @@
 \chapter{刚体动力学}
+\begin{introduction}
+\item 角动量守恒定律
+\item 动力学方程
+\item 刚体数值算法
+\item 刚体动能
+\end{introduction}
+
 \section{角动量守恒定律}
 \subsection{固定点O}
-\subsubsection{质点}
-\subsubsection{质点系与刚体}
-\subsection{质心}
-\subsection{任意点}
+\subsubsection*{质点}
+\begin{equation}
+  \sum \bm{F}=m\dot{\bm{v}}
+\end{equation}
+
+\begin{equation}
+  \sum \bm{M}_O=\bm{r}\times\sum \bm{F}=\bm{r}\times m\dot{\bm{v}}
+\end{equation}
+
+\begin{equation}
+  \dot{\bm{H}}_O=\frac{\mathrm{d}}{\mathrm{d}t}(\bm{r}\times m\bm{v})=\cancel{\dot{\bm{r}}\times m\bm{v}}+\bm{r}\times m\dot{\bm{v}}=\bm{r}\times\sum \bm{F}=\sum \bm{M}_O
+\end{equation}
+\begin{theorem}[固定点O质点角动量守恒定律]
+  \begin{equation}
+    \frac{\mathrm{d}\bm{H}_O}{\mathrm{d}t}=\sum \bm{M}_O
+  \end{equation}
+\end{theorem}
+
+\subsubsection*{质点系与刚体}
+\begin{equation}
+  (\dot{\bm{H}}_i)_O=\bm{r}_i\times\bm{F}_i
+\end{equation}
+\begin{equation}
+  \dot{\bm{H}}_O=\sum(\dot{\bm{H}}_i)_O=\sum\bm{r}_i\times\bm{F}_i=\sum\bm{M}_O
+\end{equation}
+\begin{theorem}[固定点O质点系与刚体角动量守恒定律]
+  \begin{equation}
+    \frac{\mathrm{d}\bm{H}_O}{\mathrm{d}t}=\sum \bm{M}_O
+  \end{equation}
+\end{theorem}
+
+\subsection{质心G}
+\begin{equation}
+  (\bm{H}_i)_G=\bm{r}_{i/G}\times m_i\bm{v}_i
+\end{equation}
+\begin{equation}
+  \begin{split}
+    (\dot{\bm{H}}_i)_G&=\dot{\bm{r}}_{i/G}\times m_i\bm{v}_i+\bm{r}_{i/G}\times m_i\dot{\bm{v}}_i\\
+    &=\bm{v}_{i/G}\times m_i\bm{v}_i+\bm{r}_{i/G}\times m_i\bm{a}_i\\
+    &=\bm{v}_{i/G}\times m_i(\bm{v}_{i/G}+\bm{v}_G)+\bm{r}_{i/G}\times m_i\bm{a}_i\\
+    &=(\bm{\omega}\times\bm{r}_{i/G})\times m_i\bm{v}_G+\bm{r}_{i/G}\times m_i\bm{a}_i
+  \end{split}
+\end{equation}
+
+\begin{equation}
+  \begin{split}
+    \dot{\bm{H}}_G&=\sum(\dot{\bm{H}}_i)_G\\
+    &=\sum\qty((\bm{\omega}\times\bm{r}_{i/G})\times m_i\bm{v}_G)+\sum\qty(\bm{r}_{i/G}\times m_i\bm{a}_i)\\
+    &=\qty(\bm{\omega}\times\qty(\bcancel{\sum m_i\bm{r}_{i/G}}))\times\bm{v}_G+\sum\bm{M}_G\\
+    &=\sum\bm{M}_G
+  \end{split}
+\end{equation}
+
+\begin{theorem}[质心G角动量守恒定律]
+  \begin{equation}
+    \frac{\mathrm{d}\bm{H}_G}{\mathrm{d}t}=\sum \bm{M}_G
+  \end{equation}
+\end{theorem}
+
+\subsection{任意点A}
+单个质点：
+\begin{equation}
+  (\bm{H}_i)_A=\bm{r}_{i/A}\times m_i\bm{v}_i
+\end{equation}
+
+对时间求导：
+\begin{equation}
+  \begin{split}
+    (\dot{\bm{H}}_i)_A&=\dot{\bm{r}}_{i/A}\times m_i\bm{v}_i+\bm{r}_{i/A}\times m_i\dot{\bm{v}}_i\\
+    &=\bm{v}_{i/A}\times m_i\bm{v}_i+\bm{r}_{i/A}\times m_i\bm{a}_i\\
+    &=\bm{v}_{i/A}\times m_i(\bm{v}_{i/A}+\bm{v}_A)+\bm{r}_{i/A}\times m_i\bm{a}_i\\
+    &=(\bm{\omega}\times\bm{r}_{i/A})\times m_i\bm{v}_A+\bm{r}_{i/A}\times m_i\bm{a}_i
+  \end{split}
+\end{equation}
+
+刚体：
+\begin{equation}
+  \begin{split}
+    \dot{\bm{H}}_A&=\sum(\dot{\bm{H}}_i)_A\\
+    &=\sum\qty((\bm{\omega}\times\bm{r}_{i/A})\times m_i\bm{v}_A)+\sum\qty(\bm{r}_{i/A}\times m_i\bm{a}_i)\\
+    &=\qty(\bm{\omega}\times\qty(\sum m_i\bm{r}_{i/A}))\times\bm{v}_A+\sum\bm{M}_A\\
+    &=\boxed{(\bm{\omega}\times\bm{r}_{G/A})\times m\bm{v}_A+\sum\bm{M}_A}\\
+    &=(\bm{\omega}\times\bm{r}_{G/A})\times m(\bm{v}_G+\bm{\omega}\times\bm{r}_{A/G})+\sum\bm{M}_A\\
+    &=\boxed{(\bm{\omega}\times\bm{r}_{G/A})\times m\bm{v}_G+\sum\bm{M}_A}\\
+    &=\bm{v}_{G/A}\times m\bm{v}_A+\sum\bm{M}_A\\
+    &=(\bm{v}_G-\bm{v}_A)\times m\bm{v}_A+\sum\bm{M}_A\\
+    &=\boxed{\bm{v}_A\times(-m\bm{v}_G)+\sum\bm{M}_A}
+  \end{split}
+\end{equation}
+\begin{note}
+  这里的$\bm{r}_{G/A}$是任意点A到质心G的矢量，$\bm{v}_{G/A}$是质心G相对任意点A的速度，$\bm{v}_G$是质心G的速度，$\bm{v}_A$是任意点A的速度。
+\end{note}
+
+总结起来，任意点A处的角动量守恒定律可以写为以下三种形式：
+\begin{proposition}[任意点A角动量守恒定律]\label{prop:rigid momentum A}
+  \begin{align}
+    \frac{\mathrm{d}\bm{H}_A}{\mathrm{d}t}&=(\bm{\omega}\times\bm{r}_{G/A})\times m\bm{v}_A+\sum\bm{M}_A\\
+    \frac{\mathrm{d}\bm{H}_A}{\mathrm{d}t}&=(\bm{\omega}\times\bm{r}_{G/A})\times m\bm{v}_G+\sum\bm{M}_A\\
+    \frac{\mathrm{d}\bm{H}_A}{\mathrm{d}t}&=\boxed{\bm{v}_A\times(-m\bm{v}_G)}+\sum\bm{M}_A\label{eq:rigid momentum A}
+  \end{align}
+\end{proposition}
+
+任意点A处的角动量和质心G处的角动量有以下关系：
+\begin{equation}
+  \bm{H}_A=\bm{r}_{G/A}\times m\bm{v}_G+\bm{H}_G
+\end{equation}
+\begin{equation}
+  \begin{split}
+    \dot{\bm{H}_A}&=\dot{\bm{r}}_{G/A}\times m\bm{v}_G+\bm{r}_{G/A}\times m\dot{\bm{v}}_G+\dot{\bm{H}}_G\\
+    &=(\bm{\omega}\times\bm{r}_{G/A})\times m\bm{v}_G+\bm{r}_{G/A}\times m\bm{a}_G+\dot{\bm{H}}_G
+  \end{split}
+\end{equation}
+
+带入角动量守恒定律整理可以得到：
+\begin{proposition}[力矩形式的达朗贝尔原理]
+  \begin{equation}
+    \frac{\mathrm{d}\bm{H}_G}{\mathrm{d}t}=\sum\bm{M}_A+\bm{r}_{G/A}\times(-m\bm{a}_G)
+    \label{eq:rigid momentum d'Alembert}
+  \end{equation}
+\end{proposition}
+
+根据达朗贝尔原理，质心处有惯性力。
+方程右边两项分别代表作用在刚体上的所有力对任意点A的力矩作用、惯性力对任意点A的力矩作用，所以方程右边是作用在刚体上的合力矩。
+由于力矩可以任意移动而不改变刚体的运动状态，所以可以将任意点A移动到质心G处，然后方程左边是质心G处的角动量对时间的导数，右边是作用在质心G处的合力矩。
+这个方程可以看作是力矩形式的达朗贝尔原理。
+
+在有限元仿真中，这个任意点A通常是刚体的参考点，有限元中对刚体的约束通常是对参考点的约束。
+如果对刚体的参考点施加了位移约束，那么刚体的受力情况还要考虑参考点上的约束反力，而这个反力对参考点A的力矩作用“恰好”是零，
+这就是推导任意点A处角动量守恒定律的原因。
+可以看出，在中心差分法框架下，任意点A角动量守恒定律\ref{prop:rigid momentum A}解耦了刚体的平动和转动，可以独立求解刚体的转动。
+至于刚体的平动，可以利用质心平动方程、质心加速度和参考点A的加速度之间的关系以及参考点A的约束方程来求解。
+
+\begin{note}
+  $\boxed{\bm{v}_A\times(-m\bm{v}_G)}$这一项代表什么含义？
+  对比\ref{eq:rigid momentum A}和\ref{eq:rigid momentum d'Alembert}，
+  方程\ref{eq:rigid momentum A}为什么无法像方程\ref{eq:rigid momentum d'Alembert}一样简洁优雅地体现出达朗贝尔原理？
+  当任意点A约束所有位移时，这一项是零，方程变成固定点O角动量守恒定律，可知此时方程成立。
+  当任意点A是刚体质心G时，这一项也是零，方程变成质心G角动量守恒定律，可知此时方程成立。
+  当任意点A有位移自由度且不是刚体质心G时，刚体的平动和转动耦合，刚体的平动会影响$\bm{H}_A$和$\bm{M}_A$，这一项体现了刚体的平动对任意点A角动量守恒定律的影响。
+\end{note}
+
 \section{动力学方程}
 \subsection{欧拉-拉格朗日方程}
+\subsubsection*{固定点O}
+\begin{equation}
+  \frac{\mathrm{d}\bm{H}_O}{\mathrm{d}t}=\bm{M}_O
+\end{equation}
+
+\begin{equation}
+  \bm{H}_O=[\bm{I}_O]\bm{\omega}
+\end{equation}
+
+\begin{definition}[固定点欧拉-拉格朗日方程]
+  \begin{equation}
+    [\bm{I}_O]\dot{\bm{\omega}}+\bm{\omega}\times[\bm{I}_O]\bm{\omega}=\bm{M}_O
+  \end{equation}
+\end{definition}
+
+\subsubsection*{质心G}
+\begin{equation}
+  \frac{\mathrm{d}\bm{H}_G}{\mathrm{d}t}=\bm{M}_G
+\end{equation}
+
+\begin{equation}
+  \bm{H}_G=[\bm{I}_G]\bm{\omega}
+\end{equation}
+
+\begin{definition}[质心欧拉-拉格朗日方程]
+  \begin{equation}
+    [\bm{I}_G]\dot{\bm{\omega}}+\bm{\omega}\times[\bm{I}_G]\bm{\omega}=\bm{M}_G
+  \end{equation}
+\end{definition}
+
+\subsubsection*{任意点A}
+\begin{equation}
+  \frac{\mathrm{d}\bm{H}_A}{\mathrm{d}t}=\bm{v}_A\times(-m\bm{v}_G)+\bm{M}_A
+\end{equation}
+\begin{equation}
+  \bm{H}_A=[\bm{I}_A]\bm{\omega}
+\end{equation}
+
+\begin{definition}[任意点A欧拉-拉格朗日方程]
+  \begin{equation}
+    [\bm{I}_A]\dot{\bm{\omega}}+\bm{\omega}\times[\bm{I}_A]\bm{\omega}=\bm{v}_A\times(-m\bm{v}_G)+\bm{M}_A
+  \end{equation}
+\end{definition}
+
 \subsection{矩阵形式}
 \subsection{约束}
+
 \section{数值算法}
 \subsection{Runge-Kutta方法}
 \subsection{自由运动}
 \subsection{约束一个自由度}
-\subsubsection{x方向}
-\subsubsection{y方向}
-\subsubsection{z方向}
+\subsubsection*{x方向}
+\subsubsection*{y方向}
+\subsubsection*{z方向}
 \subsection{约束两个自由度}
-\subsubsection{xy方向}
-\subsubsection{yz方向}
-\subsubsection{zx方向}
+\subsubsection*{xy方向}
+\subsubsection*{yz方向}
+\subsubsection*{zx方向}
 \subsection{定点运动}
+
 \section{动能}
 
 \subsection{固定点O}
